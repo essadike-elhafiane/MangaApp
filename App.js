@@ -17,7 +17,25 @@ import Images from "./Pages/Images";
 
 const Stack = createNativeStackNavigator();
 
+
+
 export default function App() {
+  const [showHeader, setShowHeader] = useState(true);
+
+  const handleScroll = (event) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    const scrollHeight = event.nativeEvent.contentSize.height;
+    const screenHeight = event.nativeEvent.layoutMeasurement.height;
+
+    if (offsetY + screenHeight >= scrollHeight) {
+      // Scrolling at the bottom
+      setShowHeader(false);
+    } else if (offsetY <= 0) {
+      // Scrolling at the top
+      setShowHeader(true);
+    }
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -39,7 +57,11 @@ export default function App() {
           name="Season"
           component={Season}
         />
-        <Stack.Screen name="Images" component={Images} />
+        <Stack.Screen name="Images" component={Images} options={{
+          headerShown: { showHeader},
+          presentation: 'fullScreen',
+          onScroll={handleScroll}
+        }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

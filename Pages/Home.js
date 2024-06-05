@@ -26,7 +26,7 @@ export default function Home({navigation}) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/manga"
+        const res = await axios.get("https://manga-backend-rho.vercel.app/manga"
         );
 
         // Log the entire response to check its format

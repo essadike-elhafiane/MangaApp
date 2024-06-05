@@ -34,7 +34,7 @@ const Season = ({ navigation, route }) => {
     const res = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/manga/seasons?name=" + route.params.href
+          "https://manga-backend-rho.vercel.app/manga/seasons/" + btoa( route.params.href)
         );
         console.log("Response data:", res.data.description, res.data.mangaData);
         const description = res.data.description || "No description available";

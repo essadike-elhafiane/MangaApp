@@ -5,19 +5,26 @@ const ImagesStyle = StyleSheet.create({
 
   ScrollView: {
     flex: 1,
-    backgroundColor: "red",
+    backgroundColor: "#fff",
     height: "auto",
     minWidth: screenWidth,
-    maxWidth: screenWidth,
+    maxWidth: 800,
+    position: "absolute",
+    zIndex: 100,
+    overflow: "scroll",
 
   },
   image: {
-    minWidth: screenWidth,
-    maxWidth: screenWidth,
+    minWidth:  screenWidth,
+    maxWidth: 800,
+    width: screenWidth,
     height: "auto",
     resizeMode: "contain",
     aspectRatio: 0.1,
-    // marginTop: -50,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust opacity or color as needed
   },
 });
 
