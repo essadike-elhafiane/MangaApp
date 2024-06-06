@@ -1,18 +1,19 @@
 
 import { StyleSheet , Dimensions} from "react-native";
 const screenWidth = Dimensions.get('window').width;
+
 const ImagesStyle = StyleSheet.create({
 
   ScrollView: {
-    flex: 1,
+    margin:0,
+    padding:0,
+    // flex: 1,
+    flexDirection: "column",
     backgroundColor: "#fff",
-    height: "auto",
+    height: "100%",
     minWidth: screenWidth,
-    maxWidth: 800,
-    position: "absolute",
-    zIndex: 100,
-    overflow: "scroll",
-
+    maxWidth: screenWidth,
+    width: screenWidth,
   },
   image: {
     minWidth:  screenWidth,
@@ -22,10 +23,17 @@ const ImagesStyle = StyleSheet.create({
     resizeMode: "contain",
     aspectRatio: 0.1,
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust opacity or color as needed
-  },
+  image:{
+    margin:0,
+    padding:0,
+    // minWidth: screenWidth,
+    // maxWidth: screenWidth,
+    // width: screenWidth,
+    height: 'auto',
+    aspectRatio: 0.642857143,
+    resizeMode: 'contain',
+
+  }
 });
 
 export { ImagesStyle };

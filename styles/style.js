@@ -58,4 +58,14 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     padding: 10,
   },
+  searchBar: {
+    width: "98%",
+    backgroundColor: "#f9f9f9",
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+  },
+  searchBarInput: {
+    backgroundColor: "#f9f9f9",
+  },
 });

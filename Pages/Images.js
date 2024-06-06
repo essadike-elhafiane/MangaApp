@@ -2,13 +2,14 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { View, ScrollView, Image, ActivityIndicator } from "react-native";
+import { View, ScrollView, Image, ActivityIndicator, TouchableWithoutFeedback } from "react-native";
 
 import { ImagesStyle } from "./../styles/imagesStyle";
 import { styles } from "../styles/style";
 
 const Images = ({ navigation, route }) => {
   const [Images, setImages] = useState([]);
+  const [showHeader, setShowHeader] = useState(true);
   const [zoomScale, setZoomScale] = useState(1);
 
   useEffect(() => {
@@ -26,17 +27,26 @@ const Images = ({ navigation, route }) => {
     };
     res();
   }, []);
+ 
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: showHeader,
 
+    });
+  }
+  , [showHeader]);
+  
   return (
-   
+    <TouchableWithoutFeedback onPress={() => setShowHeader(!showHeader)}>
     <ScrollView
       contentContainerStyle={ImagesStyle.ScrollView}
-      showsVerticalScrollIndicator={false}
-      showsHorizontalScrollIndicator={false}
+      scrollEventThrottle={16}
       zoomScale={zoomScale}
-      maximumZoomScale={3} // Maximum zoom scale
-      minimumZoomScale={1} // Minimum zoom scale
+      maximumZoomScale={3}
+      minimumZoomScale={1}
+     style={ImagesStyle.ScrollView}
     >
+
       {Images.length ? (
         Images.map((manga, index) => (
           <Image
@@ -50,6 +60,7 @@ const Images = ({ navigation, route }) => {
         <ActivityIndicator color={"#C8C8C8"} />
       )}
     </ScrollView>
+    </TouchableWithoutFeedback>
   );
 };
 

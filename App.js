@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   ActivityIndicator,
+  Button,
 } from "react-native";
 import axios from "axios";
 import { styles } from "./styles/style";
@@ -14,27 +15,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./Pages/Home";
 import Season from "./Pages/Season";
 import Images from "./Pages/Images";
+import Search from "./Pages/Search";
 
 const Stack = createNativeStackNavigator();
 
 
 
 export default function App() {
-  const [showHeader, setShowHeader] = useState(true);
-
-  const handleScroll = (event) => {
-    const offsetY = event.nativeEvent.contentOffset.y;
-    const scrollHeight = event.nativeEvent.contentSize.height;
-    const screenHeight = event.nativeEvent.layoutMeasurement.height;
-
-    if (offsetY + screenHeight >= scrollHeight) {
-      // Scrolling at the bottom
-      setShowHeader(false);
-    } else if (offsetY <= 0) {
-      // Scrolling at the top
-      setShowHeader(true);
-    }
-  };
+  
 
   return (
     <NavigationContainer>
@@ -42,6 +30,20 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
+          options={({ navigation }) => ({
+            title: 'Manga List',
+            headerRight: () => (
+              <Button
+                onPress={() => navigation.navigate('Search')}
+                title="Search"
+              />
+            ),
+          })
+        }
+        />
+        <Stack.Screen
+          name="Search"
+          component={Search}
           options={{ title: "Manga List" }}
         />
         <Stack.Screen
@@ -57,12 +59,12 @@ export default function App() {
           name="Season"
           component={Season}
         />
-        <Stack.Screen name="Images" component={Images} options={{
-          headerShown: { showHeader},
-          presentation: 'fullScreen',
-          onScroll={handleScroll}
-        }} />
-      </Stack.Navigator>
+          <Stack.Screen name="Images" component={Images} options={{
+            headerShown: true,
+            presentation: 'fullScreen',
+            
+          }} />
+        </Stack.Navigator>
     </NavigationContainer>
   );
 }
